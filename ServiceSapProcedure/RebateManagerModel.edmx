@@ -1,0 +1,1397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RebateManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'RebateManager.dbo.Clientes' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Clientes">
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="100" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>-->
+        <EntityType Name="Comerciales">
+          <Key>
+            <PropertyRef Name="ComercialId" />
+          </Key>
+          <Property Name="ComercialId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="TipoComercialId" Type="int" />
+          <Property Name="ZonaId" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadosAprobaciones">
+          <Key>
+            <PropertyRef Name="EstadosAprobacionId" />
+          </Key>
+          <Property Name="EstadosAprobacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'RebateManager.dbo.EstadosRebates' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EstadosRebates">
+          <Property Name="EstadoRebatesId" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" />
+        </EntityType>-->
+        <EntityType Name="EstadosSolicitudRebates">
+          <Key>
+            <PropertyRef Name="EstadosSolicitudRebateId" />
+          </Key>
+          <Property Name="EstadosSolicitudRebateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FacturaDetalles">
+          <Key>
+            <PropertyRef Name="CodigoFactura" />
+          </Key>
+          <Property Name="CodigoFactura" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="codigoDetalleFactura" Type="int" Nullable="false" />
+          <Property Name="CantidadVenta" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="Unidad" Type="varchar" MaxLength="100" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="CodigoProducto" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="CodigoFactura" />
+          </Key>
+          <Property Name="CodigoFactura" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TipoFactura" Type="int" Nullable="false" />
+          <Property Name="CodigoObra" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ComercialId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="MontoTotal" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="MontoImpuesto" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NontoSubTotal" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obras">
+          <Key>
+            <PropertyRef Name="CodigoObra" />
+          </Key>
+          <Property Name="CodigoObra" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="100" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+          <Property Name="FechaModificacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoSector" Type="varchar" MaxLength="100" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="FechaModificacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Rebates">
+          <Key>
+            <PropertyRef Name="RebateId" />
+          </Key>
+          <Property Name="RebateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TipoRebateId" Type="int" Nullable="false" />
+          <Property Name="CantidadObjetivo" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PeriodoObjetivo" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ComercialEncargadoId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+          <Property Name="EstadoRebateId" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sectores">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SolicitudAprobaciones">
+          <Key>
+            <PropertyRef Name="SolicitudAprobacionId" />
+          </Key>
+          <Property Name="SolicitudAprobacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="ComercialAprobanteId" Type="varchar" MaxLength="100" />
+          <Property Name="Unidad" Type="varchar" MaxLength="5" />
+          <Property Name="EstadoAprobacionId" Type="int" />
+          <Property Name="FechaRepuesta" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SolicitudesRebates">
+          <Key>
+            <PropertyRef Name="SolicitudRebateId" />
+          </Key>
+          <Property Name="SolicitudRebateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoRebateId" Type="int" Nullable="false" />
+          <Property Name="ComercialId" Type="int" Nullable="false" />
+          <Property Name="VolumenObjetivo" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="FechaTermino" Type="datetime" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="Periodo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="FechaAprobacion" Type="datetime" Nullable="false" />
+          <Property Name="EstadoSolicitudRebateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoComerciales">
+          <Key>
+            <PropertyRef Name="TipoComercialId" />
+          </Key>
+          <Property Name="TipoComercialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TipoFacturas">
+          <Key>
+            <PropertyRef Name="TipoFacturaId" />
+          </Key>
+          <Property Name="TipoFacturaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRebates">
+          <Key>
+            <PropertyRef Name="TipoSolicitudesRebateId" />
+          </Key>
+          <Property Name="TipoSolicitudesRebateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TipoTransaccion">
+          <Key>
+            <PropertyRef Name="TipoTransaccionId" />
+          </Key>
+          <Property Name="TipoTransaccionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TransaccionAprobaciones">
+          <Key>
+            <PropertyRef Name="TransaccionAprobacionId" />
+          </Key>
+          <Property Name="TransaccionAprobacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="TransaccionId" Type="int" />
+          <Property Name="ComercialAprobanteId" Type="varchar" MaxLength="100" />
+          <Property Name="EstadoAprobacionId" Type="int" />
+          <Property Name="FechaAprobacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Transacciones">
+          <Key>
+            <PropertyRef Name="TransaccionId" />
+          </Key>
+          <Property Name="TransaccionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="300" />
+          <Property Name="TipoTransaccionId" Type="int" />
+          <Property Name="TipoFacturacion" Type="int" />
+          <Property Name="CodigoFactura" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="FechaAplicacion" Type="datetime" />
+          <Property Name="MontoAplicado" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="ComercialId" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UnidadesNegocios">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+error 6004: The table 'RebateManager.dbo.Clientes' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_Clientes_Facturas" />-->
+        <Association Name="FK_Comerciales_TipoComerciales">
+          <End Role="TipoComerciales" Type="Self.TipoComerciales" Multiplicity="0..1" />
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComerciales">
+              <PropertyRef Name="TipoComercialId" />
+            </Principal>
+            <Dependent Role="Comerciales">
+              <PropertyRef Name="TipoComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comerciales_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Comerciales">
+              <PropertyRef Name="ZonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'RebateManager.dbo.EstadosRebates' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_EstadosRebates_Rebates" />-->
+        <Association Name="FK_FacturaDetalles_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="FacturaDetalles" Type="Self.FacturaDetalles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="CodigoFactura" />
+            </Principal>
+            <Dependent Role="FacturaDetalles">
+              <PropertyRef Name="CodigoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturaDetalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="FacturaDetalles" Type="Self.FacturaDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="FacturaDetalles">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="ComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Obras">
+          <End Role="Obras" Type="Self.Obras" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obras">
+              <PropertyRef Name="CodigoObra" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="CodigoObra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TipoFacturas">
+          <End Role="TipoFacturas" Type="Self.TipoFacturas" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="TipoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Sectores">
+          <End Role="Sectores" Type="Self.Sectores" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectores">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rebates_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="1" />
+          <End Role="Rebates" Type="Self.Rebates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Rebates">
+              <PropertyRef Name="ComercialEncargadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rebates_TipoRebates">
+          <End Role="TipoRebates" Type="Self.TipoRebates" Multiplicity="1" />
+          <End Role="Rebates" Type="Self.Rebates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRebates">
+              <PropertyRef Name="TipoSolicitudesRebateId" />
+            </Principal>
+            <Dependent Role="Rebates">
+              <PropertyRef Name="TipoRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAprobaciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="0..1" />
+          <End Role="SolicitudAprobaciones" Type="Self.SolicitudAprobaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="SolicitudAprobaciones">
+              <PropertyRef Name="ComercialAprobanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAprobaciones_TransaccionAprobaciones">
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobaciones" Multiplicity="0..1" />
+          <End Role="SolicitudAprobaciones" Type="Self.SolicitudAprobaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransaccionAprobaciones">
+              <PropertyRef Name="TransaccionAprobacionId" />
+            </Principal>
+            <Dependent Role="SolicitudAprobaciones">
+              <PropertyRef Name="EstadoAprobacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesRebates_EstadosSolicitudRebates">
+          <End Role="EstadosSolicitudRebates" Type="Self.EstadosSolicitudRebates" Multiplicity="1" />
+          <End Role="SolicitudesRebates" Type="Self.SolicitudesRebates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosSolicitudRebates">
+              <PropertyRef Name="EstadosSolicitudRebateId" />
+            </Principal>
+            <Dependent Role="SolicitudesRebates">
+              <PropertyRef Name="EstadoSolicitudRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesRebates_TipoRebates">
+          <End Role="TipoRebates" Type="Self.TipoRebates" Multiplicity="1" />
+          <End Role="SolicitudesRebates" Type="Self.SolicitudesRebates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRebates">
+              <PropertyRef Name="TipoSolicitudesRebateId" />
+            </Principal>
+            <Dependent Role="SolicitudesRebates">
+              <PropertyRef Name="TipoRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="ComercialAprobanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_EstadosAprobaciones">
+          <End Role="EstadosAprobaciones" Type="Self.EstadosAprobaciones" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosAprobaciones">
+              <PropertyRef Name="EstadosAprobacionId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="EstadoAprobacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_Transacciones">
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacciones">
+              <PropertyRef Name="TransaccionId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="TransaccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciales" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="ComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="CodigoFactura" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="CodigoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_TipoFacturas">
+          <End Role="TipoFacturas" Type="Self.TipoFacturas" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="TipoFacturacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_TipoTransaccion">
+          <End Role="TipoTransaccion" Type="Self.TipoTransaccion" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTransaccion">
+              <PropertyRef Name="TipoTransaccionId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="TipoTransaccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RebateManagerModelStoreContainer">
+          <EntitySet Name="Comerciales" EntityType="Self.Comerciales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosAprobaciones" EntityType="Self.EstadosAprobaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosSolicitudRebates" EntityType="Self.EstadosSolicitudRebates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rebates" EntityType="Self.Rebates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolicitudAprobaciones" EntityType="Self.SolicitudAprobaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolicitudesRebates" EntityType="Self.SolicitudesRebates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoComerciales" EntityType="Self.TipoComerciales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoFacturas" EntityType="Self.TipoFacturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRebates" EntityType="Self.TipoRebates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoTransaccion" EntityType="Self.TipoTransaccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransaccionAprobaciones" EntityType="Self.TransaccionAprobaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacciones" EntityType="Self.Transacciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnidadesNegocios" EntityType="Self.UnidadesNegocios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comerciales_TipoComerciales" Association="Self.FK_Comerciales_TipoComerciales">
+            <End Role="TipoComerciales" EntitySet="TipoComerciales" />
+            <End Role="Comerciales" EntitySet="Comerciales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comerciales_Zona" Association="Self.FK_Comerciales_Zona">
+            <End Role="Zona" EntitySet="Zona" />
+            <End Role="Comerciales" EntitySet="Comerciales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturaDetalles_Facturas" Association="Self.FK_FacturaDetalles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturaDetalles" EntitySet="FacturaDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturaDetalles_Productos" Association="Self.FK_FacturaDetalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="FacturaDetalles" EntitySet="FacturaDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Comerciales" Association="Self.FK_Facturas_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Obras" Association="Self.FK_Facturas_Obras">
+            <End Role="Obras" EntitySet="Obras" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TipoFacturas" Association="Self.FK_Facturas_TipoFacturas">
+            <End Role="TipoFacturas" EntitySet="TipoFacturas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Sectores" Association="Self.FK_Productos_Sectores">
+            <End Role="Sectores" EntitySet="Sectores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rebates_Comerciales" Association="Self.FK_Rebates_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Rebates" EntitySet="Rebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rebates_TipoRebates" Association="Self.FK_Rebates_TipoRebates">
+            <End Role="TipoRebates" EntitySet="TipoRebates" />
+            <End Role="Rebates" EntitySet="Rebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAprobaciones_Comerciales" Association="Self.FK_SolicitudAprobaciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="SolicitudAprobaciones" EntitySet="SolicitudAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAprobaciones_TransaccionAprobaciones" Association="Self.FK_SolicitudAprobaciones_TransaccionAprobaciones">
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+            <End Role="SolicitudAprobaciones" EntitySet="SolicitudAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesRebates_EstadosSolicitudRebates" Association="Self.FK_SolicitudesRebates_EstadosSolicitudRebates">
+            <End Role="EstadosSolicitudRebates" EntitySet="EstadosSolicitudRebates" />
+            <End Role="SolicitudesRebates" EntitySet="SolicitudesRebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesRebates_TipoRebates" Association="Self.FK_SolicitudesRebates_TipoRebates">
+            <End Role="TipoRebates" EntitySet="TipoRebates" />
+            <End Role="SolicitudesRebates" EntitySet="SolicitudesRebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_Comerciales" Association="Self.FK_TransaccionAprobaciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_EstadosAprobaciones" Association="Self.FK_TransaccionAprobaciones_EstadosAprobaciones">
+            <End Role="EstadosAprobaciones" EntitySet="EstadosAprobaciones" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_Transacciones" Association="Self.FK_TransaccionAprobaciones_Transacciones">
+            <End Role="Transacciones" EntitySet="Transacciones" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Comerciales" Association="Self.FK_Transacciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Facturas" Association="Self.FK_Transacciones_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_TipoFacturas" Association="Self.FK_Transacciones_TipoFacturas">
+            <End Role="TipoFacturas" EntitySet="TipoFacturas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_TipoTransaccion" Association="Self.FK_Transacciones_TipoTransaccion">
+            <End Role="TipoTransaccion" EntitySet="TipoTransaccion" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RebateManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comerciale">
+          <Key>
+            <PropertyRef Name="ComercialId" />
+          </Key>
+          <Property Name="ComercialId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TipoComercialId" Type="Int32" />
+          <Property Name="ZonaId" Type="Int32" />
+          <NavigationProperty Name="TipoComerciale" Relationship="Self.FK_Comerciales_TipoComerciales" FromRole="Comerciales" ToRole="TipoComerciales" />
+          <NavigationProperty Name="Zona" Relationship="Self.FK_Comerciales_Zona" FromRole="Comerciales" ToRole="Zona" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Comerciales" FromRole="Comerciales" ToRole="Facturas" />
+          <NavigationProperty Name="Rebates" Relationship="Self.FK_Rebates_Comerciales" FromRole="Comerciales" ToRole="Rebates" />
+          <NavigationProperty Name="SolicitudAprobaciones" Relationship="Self.FK_SolicitudAprobaciones_Comerciales" FromRole="Comerciales" ToRole="SolicitudAprobaciones" />
+          <NavigationProperty Name="TransaccionAprobaciones" Relationship="Self.FK_TransaccionAprobaciones_Comerciales" FromRole="Comerciales" ToRole="TransaccionAprobaciones" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Transacciones_Comerciales" FromRole="Comerciales" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="EstadosAprobacione">
+          <Key>
+            <PropertyRef Name="EstadosAprobacionId" />
+          </Key>
+          <Property Name="EstadosAprobacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TransaccionAprobaciones" Relationship="Self.FK_TransaccionAprobaciones_EstadosAprobaciones" FromRole="EstadosAprobaciones" ToRole="TransaccionAprobaciones" />
+        </EntityType>
+        <EntityType Name="EstadosSolicitudRebate">
+          <Key>
+            <PropertyRef Name="EstadosSolicitudRebateId" />
+          </Key>
+          <Property Name="EstadosSolicitudRebateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SolicitudesRebates" Relationship="Self.FK_SolicitudesRebates_EstadosSolicitudRebates" FromRole="EstadosSolicitudRebates" ToRole="SolicitudesRebates" />
+        </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="CodigoFactura" />
+          </Key>
+          <Property Name="CodigoFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigoDetalleFactura" Type="Int32" Nullable="false" />
+          <Property Name="CantidadVenta" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Unidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="CodigoProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_FacturaDetalles_Facturas" FromRole="FacturaDetalles" ToRole="Facturas" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_FacturaDetalles_Productos" FromRole="FacturaDetalles" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="CodigoFactura" />
+          </Key>
+          <Property Name="CodigoFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoFactura" Type="Int32" Nullable="false" />
+          <Property Name="CodigoObra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComercialId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="MontoImpuesto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NontoSubTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Comerciale" Relationship="Self.FK_Facturas_Comerciales" FromRole="Facturas" ToRole="Comerciales" />
+          <NavigationProperty Name="FacturaDetalle" Relationship="Self.FK_FacturaDetalles_Facturas" FromRole="Facturas" ToRole="FacturaDetalles" />
+          <NavigationProperty Name="Obra" Relationship="Self.FK_Facturas_Obras" FromRole="Facturas" ToRole="Obras" />
+          <NavigationProperty Name="TipoFactura1" Relationship="Self.FK_Facturas_TipoFacturas" FromRole="Facturas" ToRole="TipoFacturas" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Transacciones_Facturas" FromRole="Facturas" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="Obra">
+          <Key>
+            <PropertyRef Name="CodigoObra" />
+          </Key>
+          <Property Name="CodigoObra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Obras" FromRole="Obras" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoSector" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FacturaDetalles" Relationship="Self.FK_FacturaDetalles_Productos" FromRole="Productos" ToRole="FacturaDetalles" />
+          <NavigationProperty Name="Sectore" Relationship="Self.FK_Productos_Sectores" FromRole="Productos" ToRole="Sectores" />
+        </EntityType>
+        <EntityType Name="Rebate">
+          <Key>
+            <PropertyRef Name="RebateId" />
+          </Key>
+          <Property Name="RebateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoRebateId" Type="Int32" Nullable="false" />
+          <Property Name="CantidadObjetivo" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PeriodoObjetivo" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ComercialEncargadoId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoRebateId" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Comerciale" Relationship="Self.FK_Rebates_Comerciales" FromRole="Rebates" ToRole="Comerciales" />
+          <NavigationProperty Name="TipoRebate" Relationship="Self.FK_Rebates_TipoRebates" FromRole="Rebates" ToRole="TipoRebates" />
+        </EntityType>
+        <EntityType Name="Sectore">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Sectores" FromRole="Sectores" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="SolicitudAprobacione">
+          <Key>
+            <PropertyRef Name="SolicitudAprobacionId" />
+          </Key>
+          <Property Name="SolicitudAprobacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="ComercialAprobanteId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacionId" Type="Int32" />
+          <Property Name="FechaRepuesta" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Comerciale" Relationship="Self.FK_SolicitudAprobaciones_Comerciales" FromRole="SolicitudAprobaciones" ToRole="Comerciales" />
+          <NavigationProperty Name="TransaccionAprobacione" Relationship="Self.FK_SolicitudAprobaciones_TransaccionAprobaciones" FromRole="SolicitudAprobaciones" ToRole="TransaccionAprobaciones" />
+        </EntityType>
+        <EntityType Name="SolicitudesRebate">
+          <Key>
+            <PropertyRef Name="SolicitudRebateId" />
+          </Key>
+          <Property Name="SolicitudRebateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoRebateId" Type="Int32" Nullable="false" />
+          <Property Name="ComercialId" Type="Int32" Nullable="false" />
+          <Property Name="VolumenObjetivo" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="FechaTermino" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Periodo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaAprobacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoSolicitudRebateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadosSolicitudRebate" Relationship="Self.FK_SolicitudesRebates_EstadosSolicitudRebates" FromRole="SolicitudesRebates" ToRole="EstadosSolicitudRebates" />
+          <NavigationProperty Name="TipoRebate" Relationship="Self.FK_SolicitudesRebates_TipoRebates" FromRole="SolicitudesRebates" ToRole="TipoRebates" />
+        </EntityType>
+        <EntityType Name="TipoComerciale">
+          <Key>
+            <PropertyRef Name="TipoComercialId" />
+          </Key>
+          <Property Name="TipoComercialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comerciales" Relationship="Self.FK_Comerciales_TipoComerciales" FromRole="TipoComerciales" ToRole="Comerciales" />
+        </EntityType>
+        <EntityType Name="TipoFactura">
+          <Key>
+            <PropertyRef Name="TipoFacturaId" />
+          </Key>
+          <Property Name="TipoFacturaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_TipoFacturas" FromRole="TipoFacturas" ToRole="Facturas" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Transacciones_TipoFacturas" FromRole="TipoFacturas" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="TipoRebate">
+          <Key>
+            <PropertyRef Name="TipoSolicitudesRebateId" />
+          </Key>
+          <Property Name="TipoSolicitudesRebateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rebates" Relationship="Self.FK_Rebates_TipoRebates" FromRole="TipoRebates" ToRole="Rebates" />
+          <NavigationProperty Name="SolicitudesRebates" Relationship="Self.FK_SolicitudesRebates_TipoRebates" FromRole="TipoRebates" ToRole="SolicitudesRebates" />
+        </EntityType>
+        <EntityType Name="TipoTransaccion">
+          <Key>
+            <PropertyRef Name="TipoTransaccionId" />
+          </Key>
+          <Property Name="TipoTransaccionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Transacciones_TipoTransaccion" FromRole="TipoTransaccion" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="TransaccionAprobacione">
+          <Key>
+            <PropertyRef Name="TransaccionAprobacionId" />
+          </Key>
+          <Property Name="TransaccionAprobacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="TransaccionId" Type="Int32" />
+          <Property Name="ComercialAprobanteId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacionId" Type="Int32" />
+          <Property Name="FechaAprobacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Comerciale" Relationship="Self.FK_TransaccionAprobaciones_Comerciales" FromRole="TransaccionAprobaciones" ToRole="Comerciales" />
+          <NavigationProperty Name="EstadosAprobacione" Relationship="Self.FK_TransaccionAprobaciones_EstadosAprobaciones" FromRole="TransaccionAprobaciones" ToRole="EstadosAprobaciones" />
+          <NavigationProperty Name="SolicitudAprobaciones" Relationship="Self.FK_SolicitudAprobaciones_TransaccionAprobaciones" FromRole="TransaccionAprobaciones" ToRole="SolicitudAprobaciones" />
+          <NavigationProperty Name="Transaccione" Relationship="Self.FK_TransaccionAprobaciones_Transacciones" FromRole="TransaccionAprobaciones" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="Transaccione">
+          <Key>
+            <PropertyRef Name="TransaccionId" />
+          </Key>
+          <Property Name="TransaccionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="TipoTransaccionId" Type="Int32" />
+          <Property Name="TipoFacturacion" Type="Int32" />
+          <Property Name="CodigoFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="FechaAplicacion" Type="DateTime" Precision="3" />
+          <Property Name="MontoAplicado" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ComercialId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comerciale" Relationship="Self.FK_Transacciones_Comerciales" FromRole="Transacciones" ToRole="Comerciales" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Transacciones_Facturas" FromRole="Transacciones" ToRole="Facturas" />
+          <NavigationProperty Name="TipoFactura" Relationship="Self.FK_Transacciones_TipoFacturas" FromRole="Transacciones" ToRole="TipoFacturas" />
+          <NavigationProperty Name="TipoTransaccion" Relationship="Self.FK_Transacciones_TipoTransaccion" FromRole="Transacciones" ToRole="TipoTransaccion" />
+          <NavigationProperty Name="TransaccionAprobaciones" Relationship="Self.FK_TransaccionAprobaciones_Transacciones" FromRole="Transacciones" ToRole="TransaccionAprobaciones" />
+        </EntityType>
+        <EntityType Name="UnidadesNegocio">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comerciales" Relationship="Self.FK_Comerciales_Zona" FromRole="Zona" ToRole="Comerciales" />
+        </EntityType>
+        <Association Name="FK_Comerciales_TipoComerciales">
+          <End Role="TipoComerciales" Type="Self.TipoComerciale" Multiplicity="0..1" />
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComerciales">
+              <PropertyRef Name="TipoComercialId" />
+            </Principal>
+            <Dependent Role="Comerciales">
+              <PropertyRef Name="TipoComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comerciales_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Comerciales">
+              <PropertyRef Name="ZonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="ComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rebates_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="1" />
+          <End Role="Rebates" Type="Self.Rebate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Rebates">
+              <PropertyRef Name="ComercialEncargadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAprobaciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="0..1" />
+          <End Role="SolicitudAprobaciones" Type="Self.SolicitudAprobacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="SolicitudAprobaciones">
+              <PropertyRef Name="ComercialAprobanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="ComercialAprobanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Comerciales">
+          <End Role="Comerciales" Type="Self.Comerciale" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transaccione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comerciales">
+              <PropertyRef Name="ComercialId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="ComercialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_EstadosAprobaciones">
+          <End Role="EstadosAprobaciones" Type="Self.EstadosAprobacione" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosAprobaciones">
+              <PropertyRef Name="EstadosAprobacionId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="EstadoAprobacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesRebates_EstadosSolicitudRebates">
+          <End Role="EstadosSolicitudRebates" Type="Self.EstadosSolicitudRebate" Multiplicity="1" />
+          <End Role="SolicitudesRebates" Type="Self.SolicitudesRebate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosSolicitudRebates">
+              <PropertyRef Name="EstadosSolicitudRebateId" />
+            </Principal>
+            <Dependent Role="SolicitudesRebates">
+              <PropertyRef Name="EstadoSolicitudRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturaDetalles_Facturas">
+          <End Role="Facturas" Type="Self.Factura" Multiplicity="1" />
+          <End Role="FacturaDetalles" Type="Self.FacturaDetalle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="CodigoFactura" />
+            </Principal>
+            <Dependent Role="FacturaDetalles">
+              <PropertyRef Name="CodigoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturaDetalles_Productos">
+          <End Role="Productos" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="FacturaDetalles" Type="Self.FacturaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="FacturaDetalles">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Obras">
+          <End Role="Obras" Type="Self.Obra" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obras">
+              <PropertyRef Name="CodigoObra" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="CodigoObra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TipoFacturas">
+          <End Role="TipoFacturas" Type="Self.TipoFactura" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="TipoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Facturas">
+          <End Role="Facturas" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transaccione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="CodigoFactura" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="CodigoFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Sectores">
+          <End Role="Sectores" Type="Self.Sectore" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectores">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rebates_TipoRebates">
+          <End Role="TipoRebates" Type="Self.TipoRebate" Multiplicity="1" />
+          <End Role="Rebates" Type="Self.Rebate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRebates">
+              <PropertyRef Name="TipoSolicitudesRebateId" />
+            </Principal>
+            <Dependent Role="Rebates">
+              <PropertyRef Name="TipoRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAprobaciones_TransaccionAprobaciones">
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobacione" Multiplicity="0..1" />
+          <End Role="SolicitudAprobaciones" Type="Self.SolicitudAprobacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransaccionAprobaciones">
+              <PropertyRef Name="TransaccionAprobacionId" />
+            </Principal>
+            <Dependent Role="SolicitudAprobaciones">
+              <PropertyRef Name="EstadoAprobacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesRebates_TipoRebates">
+          <End Role="TipoRebates" Type="Self.TipoRebate" Multiplicity="1" />
+          <End Role="SolicitudesRebates" Type="Self.SolicitudesRebate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRebates">
+              <PropertyRef Name="TipoSolicitudesRebateId" />
+            </Principal>
+            <Dependent Role="SolicitudesRebates">
+              <PropertyRef Name="TipoRebateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_TipoFacturas">
+          <End Role="TipoFacturas" Type="Self.TipoFactura" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transaccione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="TipoFacturacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_TipoTransaccion">
+          <End Role="TipoTransaccion" Type="Self.TipoTransaccion" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transaccione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTransaccion">
+              <PropertyRef Name="TipoTransaccionId" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="TipoTransaccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransaccionAprobaciones_Transacciones">
+          <End Role="Transacciones" Type="Self.Transaccione" Multiplicity="0..1" />
+          <End Role="TransaccionAprobaciones" Type="Self.TransaccionAprobacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacciones">
+              <PropertyRef Name="TransaccionId" />
+            </Principal>
+            <Dependent Role="TransaccionAprobaciones">
+              <PropertyRef Name="TransaccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RebateManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comerciales" EntityType="Self.Comerciale" />
+          <EntitySet Name="EstadosAprobaciones" EntityType="Self.EstadosAprobacione" />
+          <EntitySet Name="EstadosSolicitudRebates" EntityType="Self.EstadosSolicitudRebate" />
+          <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalle" />
+          <EntitySet Name="Facturas" EntityType="Self.Factura" />
+          <EntitySet Name="Obras" EntityType="Self.Obra" />
+          <EntitySet Name="Productos" EntityType="Self.Producto" />
+          <EntitySet Name="Rebates" EntityType="Self.Rebate" />
+          <EntitySet Name="Sectores" EntityType="Self.Sectore" />
+          <EntitySet Name="SolicitudAprobaciones" EntityType="Self.SolicitudAprobacione" />
+          <EntitySet Name="SolicitudesRebates" EntityType="Self.SolicitudesRebate" />
+          <EntitySet Name="TipoComerciales" EntityType="Self.TipoComerciale" />
+          <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
+          <EntitySet Name="TipoRebates" EntityType="Self.TipoRebate" />
+          <EntitySet Name="TipoTransaccions" EntityType="Self.TipoTransaccion" />
+          <EntitySet Name="TransaccionAprobaciones" EntityType="Self.TransaccionAprobacione" />
+          <EntitySet Name="Transacciones" EntityType="Self.Transaccione" />
+          <EntitySet Name="UnidadesNegocios" EntityType="Self.UnidadesNegocio" />
+          <EntitySet Name="Zonas" EntityType="Self.Zona" />
+          <AssociationSet Name="FK_Comerciales_TipoComerciales" Association="Self.FK_Comerciales_TipoComerciales">
+            <End Role="TipoComerciales" EntitySet="TipoComerciales" />
+            <End Role="Comerciales" EntitySet="Comerciales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comerciales_Zona" Association="Self.FK_Comerciales_Zona">
+            <End Role="Zona" EntitySet="Zonas" />
+            <End Role="Comerciales" EntitySet="Comerciales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Comerciales" Association="Self.FK_Facturas_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rebates_Comerciales" Association="Self.FK_Rebates_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Rebates" EntitySet="Rebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAprobaciones_Comerciales" Association="Self.FK_SolicitudAprobaciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="SolicitudAprobaciones" EntitySet="SolicitudAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_Comerciales" Association="Self.FK_TransaccionAprobaciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Comerciales" Association="Self.FK_Transacciones_Comerciales">
+            <End Role="Comerciales" EntitySet="Comerciales" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_EstadosAprobaciones" Association="Self.FK_TransaccionAprobaciones_EstadosAprobaciones">
+            <End Role="EstadosAprobaciones" EntitySet="EstadosAprobaciones" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesRebates_EstadosSolicitudRebates" Association="Self.FK_SolicitudesRebates_EstadosSolicitudRebates">
+            <End Role="EstadosSolicitudRebates" EntitySet="EstadosSolicitudRebates" />
+            <End Role="SolicitudesRebates" EntitySet="SolicitudesRebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturaDetalles_Facturas" Association="Self.FK_FacturaDetalles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturaDetalles" EntitySet="FacturaDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturaDetalles_Productos" Association="Self.FK_FacturaDetalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="FacturaDetalles" EntitySet="FacturaDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Obras" Association="Self.FK_Facturas_Obras">
+            <End Role="Obras" EntitySet="Obras" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TipoFacturas" Association="Self.FK_Facturas_TipoFacturas">
+            <End Role="TipoFacturas" EntitySet="TipoFacturas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Facturas" Association="Self.FK_Transacciones_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Sectores" Association="Self.FK_Productos_Sectores">
+            <End Role="Sectores" EntitySet="Sectores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rebates_TipoRebates" Association="Self.FK_Rebates_TipoRebates">
+            <End Role="TipoRebates" EntitySet="TipoRebates" />
+            <End Role="Rebates" EntitySet="Rebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAprobaciones_TransaccionAprobaciones" Association="Self.FK_SolicitudAprobaciones_TransaccionAprobaciones">
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+            <End Role="SolicitudAprobaciones" EntitySet="SolicitudAprobaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesRebates_TipoRebates" Association="Self.FK_SolicitudesRebates_TipoRebates">
+            <End Role="TipoRebates" EntitySet="TipoRebates" />
+            <End Role="SolicitudesRebates" EntitySet="SolicitudesRebates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_TipoFacturas" Association="Self.FK_Transacciones_TipoFacturas">
+            <End Role="TipoFacturas" EntitySet="TipoFacturas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_TipoTransaccion" Association="Self.FK_Transacciones_TipoTransaccion">
+            <End Role="TipoTransaccion" EntitySet="TipoTransaccions" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransaccionAprobaciones_Transacciones" Association="Self.FK_TransaccionAprobaciones_Transacciones">
+            <End Role="Transacciones" EntitySet="Transacciones" />
+            <End Role="TransaccionAprobaciones" EntitySet="TransaccionAprobaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RebateManagerModelStoreContainer" CdmEntityContainer="RebateManagerEntities">
+          <EntitySetMapping Name="Comerciales">
+            <EntityTypeMapping TypeName="RebateManagerModel.Comerciale">
+              <MappingFragment StoreEntitySet="Comerciales">
+                <ScalarProperty Name="ComercialId" ColumnName="ComercialId" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TipoComercialId" ColumnName="TipoComercialId" />
+                <ScalarProperty Name="ZonaId" ColumnName="ZonaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadosAprobaciones">
+            <EntityTypeMapping TypeName="RebateManagerModel.EstadosAprobacione">
+              <MappingFragment StoreEntitySet="EstadosAprobaciones">
+                <ScalarProperty Name="EstadosAprobacionId" ColumnName="EstadosAprobacionId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadosSolicitudRebates">
+            <EntityTypeMapping TypeName="RebateManagerModel.EstadosSolicitudRebate">
+              <MappingFragment StoreEntitySet="EstadosSolicitudRebates">
+                <ScalarProperty Name="EstadosSolicitudRebateId" ColumnName="EstadosSolicitudRebateId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaDetalles">
+            <EntityTypeMapping TypeName="RebateManagerModel.FacturaDetalle">
+              <MappingFragment StoreEntitySet="FacturaDetalles">
+                <ScalarProperty Name="CodigoFactura" ColumnName="CodigoFactura" />
+                <ScalarProperty Name="codigoDetalleFactura" ColumnName="codigoDetalleFactura" />
+                <ScalarProperty Name="CantidadVenta" ColumnName="CantidadVenta" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="RebateManagerModel.Factura">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="CodigoFactura" ColumnName="CodigoFactura" />
+                <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
+                <ScalarProperty Name="CodigoObra" ColumnName="CodigoObra" />
+                <ScalarProperty Name="ComercialId" ColumnName="ComercialId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="MontoImpuesto" ColumnName="MontoImpuesto" />
+                <ScalarProperty Name="NontoSubTotal" ColumnName="NontoSubTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obras">
+            <EntityTypeMapping TypeName="RebateManagerModel.Obra">
+              <MappingFragment StoreEntitySet="Obras">
+                <ScalarProperty Name="CodigoObra" ColumnName="CodigoObra" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="RebateManagerModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="CodigoSector" ColumnName="CodigoSector" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rebates">
+            <EntityTypeMapping TypeName="RebateManagerModel.Rebate">
+              <MappingFragment StoreEntitySet="Rebates">
+                <ScalarProperty Name="RebateId" ColumnName="RebateId" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="TipoRebateId" ColumnName="TipoRebateId" />
+                <ScalarProperty Name="CantidadObjetivo" ColumnName="CantidadObjetivo" />
+                <ScalarProperty Name="PeriodoObjetivo" ColumnName="PeriodoObjetivo" />
+                <ScalarProperty Name="ComercialEncargadoId" ColumnName="ComercialEncargadoId" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="EstadoRebateId" ColumnName="EstadoRebateId" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectores">
+            <EntityTypeMapping TypeName="RebateManagerModel.Sectore">
+              <MappingFragment StoreEntitySet="Sectores">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolicitudAprobaciones">
+            <EntityTypeMapping TypeName="RebateManagerModel.SolicitudAprobacione">
+              <MappingFragment StoreEntitySet="SolicitudAprobaciones">
+                <ScalarProperty Name="SolicitudAprobacionId" ColumnName="SolicitudAprobacionId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="ComercialAprobanteId" ColumnName="ComercialAprobanteId" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="EstadoAprobacionId" ColumnName="EstadoAprobacionId" />
+                <ScalarProperty Name="FechaRepuesta" ColumnName="FechaRepuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolicitudesRebates">
+            <EntityTypeMapping TypeName="RebateManagerModel.SolicitudesRebate">
+              <MappingFragment StoreEntitySet="SolicitudesRebates">
+                <ScalarProperty Name="SolicitudRebateId" ColumnName="SolicitudRebateId" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="TipoRebateId" ColumnName="TipoRebateId" />
+                <ScalarProperty Name="ComercialId" ColumnName="ComercialId" />
+                <ScalarProperty Name="VolumenObjetivo" ColumnName="VolumenObjetivo" />
+                <ScalarProperty Name="FechaTermino" ColumnName="FechaTermino" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+                <ScalarProperty Name="EstadoSolicitudRebateId" ColumnName="EstadoSolicitudRebateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoComerciales">
+            <EntityTypeMapping TypeName="RebateManagerModel.TipoComerciale">
+              <MappingFragment StoreEntitySet="TipoComerciales">
+                <ScalarProperty Name="TipoComercialId" ColumnName="TipoComercialId" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoFacturas">
+            <EntityTypeMapping TypeName="RebateManagerModel.TipoFactura">
+              <MappingFragment StoreEntitySet="TipoFacturas">
+                <ScalarProperty Name="TipoFacturaId" ColumnName="TipoFacturaId" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRebates">
+            <EntityTypeMapping TypeName="RebateManagerModel.TipoRebate">
+              <MappingFragment StoreEntitySet="TipoRebates">
+                <ScalarProperty Name="TipoSolicitudesRebateId" ColumnName="TipoSolicitudesRebateId" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoTransaccions">
+            <EntityTypeMapping TypeName="RebateManagerModel.TipoTransaccion">
+              <MappingFragment StoreEntitySet="TipoTransaccion">
+                <ScalarProperty Name="TipoTransaccionId" ColumnName="TipoTransaccionId" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransaccionAprobaciones">
+            <EntityTypeMapping TypeName="RebateManagerModel.TransaccionAprobacione">
+              <MappingFragment StoreEntitySet="TransaccionAprobaciones">
+                <ScalarProperty Name="TransaccionAprobacionId" ColumnName="TransaccionAprobacionId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="TransaccionId" ColumnName="TransaccionId" />
+                <ScalarProperty Name="ComercialAprobanteId" ColumnName="ComercialAprobanteId" />
+                <ScalarProperty Name="EstadoAprobacionId" ColumnName="EstadoAprobacionId" />
+                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacciones">
+            <EntityTypeMapping TypeName="RebateManagerModel.Transaccione">
+              <MappingFragment StoreEntitySet="Transacciones">
+                <ScalarProperty Name="TransaccionId" ColumnName="TransaccionId" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="TipoTransaccionId" ColumnName="TipoTransaccionId" />
+                <ScalarProperty Name="TipoFacturacion" ColumnName="TipoFacturacion" />
+                <ScalarProperty Name="CodigoFactura" ColumnName="CodigoFactura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaAplicacion" ColumnName="FechaAplicacion" />
+                <ScalarProperty Name="MontoAplicado" ColumnName="MontoAplicado" />
+                <ScalarProperty Name="ComercialId" ColumnName="ComercialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnidadesNegocios">
+            <EntityTypeMapping TypeName="RebateManagerModel.UnidadesNegocio">
+              <MappingFragment StoreEntitySet="UnidadesNegocios">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zonas">
+            <EntityTypeMapping TypeName="RebateManagerModel.Zona">
+              <MappingFragment StoreEntitySet="Zona">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

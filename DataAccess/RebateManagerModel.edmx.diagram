@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="996074b37ad84fd79a152b55a60151bc" Name="Diagram1">
+        <EntityTypeShape EntityType="RebateManagerModel.Comerciale" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.EstadosAprobacione" Width="1.5" PointX="10.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.EstadosSolicitudRebate" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.FacturaDetalle" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Factura" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Obra" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Producto" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Rebate" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Sectore" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.SolicitudAprobacione" Width="1.5" PointX="15" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.SolicitudesRebate" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.TipoComerciale" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.TipoFactura" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.TipoRebate" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.TipoTransaccion" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.TransaccionAprobacione" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Transaccione" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.UnidadesNegocio" Width="1.5" PointX="12.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RebateManagerModel.Zona" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="RebateManagerModel.FK_Comerciales_TipoComerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Comerciales_Zona" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Facturas_Comerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Rebates_Comerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_SolicitudAprobaciones_Comerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_TransaccionAprobaciones_Comerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Transacciones_Comerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_TransaccionAprobaciones_EstadosAprobaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_SolicitudesRebates_EstadosSolicitudRebates" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_FacturaDetalles_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_FacturaDetalles_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Facturas_Obras" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Facturas_TipoFacturas" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Transacciones_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Productos_Sectores" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Rebates_TipoRebates" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_SolicitudAprobaciones_TransaccionAprobaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_SolicitudesRebates_TipoRebates" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Transacciones_TipoFacturas" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_Transacciones_TipoTransaccion" ManuallyRouted="false" />
+        <AssociationConnector Association="RebateManagerModel.FK_TransaccionAprobaciones_Transacciones" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
